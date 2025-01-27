@@ -51,7 +51,10 @@ input[name="room"] {
   font-size: 1rem;
   margin-right: 10px;
   width: 250px;
-  border: 1px solid #ccc;
+  border-bottom: solid 1px white;
+  border-right: solid 1px white;
+  border-left: solid 1px #3e3e3d;
+  border-top: solid 1px #3e3e3d;
 }
 
 button {
