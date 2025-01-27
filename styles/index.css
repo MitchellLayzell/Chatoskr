@@ -1,12 +1,4 @@
 /* Index page styling */
-@font-face {
-  font-family: "Medodica"; /*a name to be used later*/
-  src: url("MedodicaRegular.otf"); /*URL to font*/
-}
-
-* {
-  font-family: "Medodica";
-}
 #room-container {
   margin-top: 50px;
   text-align: center;

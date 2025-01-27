@@ -1,8 +1,13 @@
 /* Global styling */
+@font-face {
+  font-family: "Medodica"; /*a name to be used later*/
+  src: url("MedodicaRegular.otf"); /*URL to font*/
+}
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  font-family: "Medodica";
 }
 
 body {
