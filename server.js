@@ -9,6 +9,7 @@ app.set("view engine", "ejs");
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "styles")));
+app.use(express.static(path.join(__dirname, "images")));
 
 const rooms = {};
 
