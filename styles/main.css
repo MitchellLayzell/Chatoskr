@@ -11,7 +11,7 @@
 }
 
 body {
-  background-color: #f0f0f0;
+  background-color: #037b7a;
   color: #333;
 }
 
@@ -21,7 +21,7 @@ a {
 }
 
 button {
-  background-color: #1a73e8;
+  background-color: #9e9a9b;
   color: white;
   border: none;
   padding: 5px 10px;
@@ -30,5 +30,5 @@ button {
 }
 
 button:hover {
-  background-color: #1558b0;
+  background-color: #585858;
 }
