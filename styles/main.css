@@ -1,0 +1,30 @@
+/* Global styling */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Courier New", Courier, monospace;
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+a {
+  color: #1a73e8;
+  text-decoration: none;
+}
+
+button {
+  background-color: #1a73e8;
+  color: white;
+  border: none;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+button:hover {
+  background-color: #1558b0;
+}
