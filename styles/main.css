@@ -10,9 +10,17 @@
   font-family: "Medodica";
 }
 
+#bannerContainer {
+  background-color: #6a69ff;
+  width: 100%;
+  display: flex;
+  align-items: center; /* Vertically center the items */
+  justify-content: space-between; /* Distribute space between items */
+  padding: 10px; /* Optional: Adds some padding around the items */
+}
 img #logo {
   max-width: 100%;
-  max-height: 80vh;
+  max-height: 160vh;
 }
 
 body {
