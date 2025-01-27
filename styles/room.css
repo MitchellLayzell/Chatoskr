@@ -25,7 +25,7 @@ body {
   padding: 8px;
   margin: 5px 0;
   background-color: #d1d1d1;
-  font-size: 2rem;
+  font-size: 1rem;
 }
 
 #message-container div:nth-child(odd) {
@@ -51,7 +51,7 @@ body {
   flex-grow: 1;
   width: 80%;
   padding: 8px;
-  font-size: 2rem;
+  font-size: 1rem;
   border-bottom: solid 1px white;
   border-right: solid 1px white;
   border-left: solid 1px #3e3e3d;
