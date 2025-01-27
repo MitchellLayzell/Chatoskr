@@ -10,6 +10,11 @@
   font-family: "Medodica";
 }
 
+img #logo {
+  max-width: 100%;
+  max-height: 80vh;
+}
+
 body {
   background-color: #037b7a;
   color: #333;
