@@ -55,17 +55,13 @@ function appendMessage(message) {
 
   // Auto-scroll logic
   const isAtBottom =
-    messageContainer.scrollTop + messageContainer.clientHeight >=
-    messageContainer.scrollHeight - 10;
+    Math.abs(
+      messageContainer.scrollTop +
+        messageContainer.clientHeight -
+        messageContainer.scrollHeight
+    ) <= 10;
 
   if (isAtBottom) {
-    scrollToBottom();
+    messageContainer.scrollTop = messageContainer.scrollHeight;
   }
-}
-
-function scrollToBottom() {
-  window.scrollTo({
-    top: document.body.scrollHeight,
-    behavior: "smooth",
-  });
 }
