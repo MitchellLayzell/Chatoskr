@@ -1,4 +1,4 @@
-# Chat App
+# Chatoskr
 
 ## Overview
 This is a simple chat application where users can join different chat rooms and communicate with each other in real-time. Built using **Node.js**, **Express**, and **Socket.io**, the app features dynamic room creation and live messaging.
