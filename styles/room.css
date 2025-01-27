@@ -20,6 +20,7 @@ body {
 }
 
 #message-container div {
+  width: 80%;
   padding: 8px;
   margin: 5px 0;
   border-radius: 5px;
@@ -37,7 +38,6 @@ body {
   max-width: 1200px;
   position: fixed;
   bottom: 0;
-  width: 100%;
   background-color: #fff;
   padding: 10px;
   display: flex;
@@ -48,6 +48,7 @@ body {
 }
 
 #message-input {
+  flex-grow: 1;
   width: 80%;
   padding: 8px;
   font-size: 1rem;
