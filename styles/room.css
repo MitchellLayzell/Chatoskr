@@ -68,3 +68,10 @@ body {
   padding: 5px 10px;
   cursor: pointer;
 }
+
+#send-button:hover {
+  border-top: solid 2px black;
+  border-left: solid 2px black;
+  border-right: solid 4px black;
+  border-bottom: solid 4px black;
+}
