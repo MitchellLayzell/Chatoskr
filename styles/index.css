@@ -34,6 +34,9 @@ form {
   width: 80%;
   max-width: 1200px;
   background-color: #fff;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
 }
 
 input[name="room"] {
