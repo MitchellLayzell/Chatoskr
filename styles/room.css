@@ -24,7 +24,7 @@ body {
   margin: 5px 0;
   border-radius: 5px;
   background-color: #d1d1d1;
-  font-size: 1rem;
+  font-size: 3rem;
 }
 
 #message-container div:nth-child(odd) {
@@ -50,7 +50,7 @@ body {
   flex-grow: 1;
   width: 80%;
   padding: 8px;
-  font-size: 1rem;
+  font-size: 3rem;
   border-radius: 5px;
   border: 1px solid #ddd;
 }
@@ -58,7 +58,7 @@ body {
 #send-button {
   width: 15%;
   padding: 8px;
-  font-size: 1rem;
+  font-size: 3rem;
   background-color: #1a73e8;
   color: white;
   border: none;
