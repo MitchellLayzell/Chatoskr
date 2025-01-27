@@ -37,7 +37,7 @@ body {
   display: flex;
   max-width: 1200px;
   position: fixed;
-  bottom: 0;
+  bottom: 5;
   background-color: #d6d7d1;
   padding: 10px;
   display: flex;

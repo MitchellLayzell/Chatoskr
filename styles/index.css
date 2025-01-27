@@ -37,6 +37,14 @@ h1 {
   padding: 5px 10px;
 }
 
+#create-header {
+  margin-top: 20px;
+  width: 80%;
+  margin-top: 20px;
+  background-color: #d6d7d1;
+  border-top: solid 1px white;
+}
+
 form {
   margin-top: 20px;
   display: flex;
@@ -46,12 +54,10 @@ form {
 #make-room {
   width: 80%;
   max-width: 1200px;
-  margin-top: 20px;
   display: flex;
   justify-content: center;
   padding: 10px;
   background-color: #d6d7d1;
-  border-top: solid 1px white;
   border-left: solid 1px white;
   border-right: solid 1px #3e3e3d;
   border-bottom: solid 1px #3e3e3d;
