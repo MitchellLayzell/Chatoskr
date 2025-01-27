@@ -40,18 +40,30 @@ app.get("/:room", (req, res) => {
 });
 
 io.on("connection", (socket) => {
+  console.log("New user connected", socket.id);
+
   socket.on("new-user", (room, name) => {
+    console.log(`${name} joined room: ${room}`);
     socket.join(room);
+    if (!rooms[room]) rooms[room] = { users: {} };
     rooms[room].users[socket.id] = name;
     socket.to(room).emit("user-connected", name);
   });
+
   socket.on("send-chat-message", (room, message) => {
+    console.log(
+      `Message from ${
+        rooms[room]?.users[socket.id]
+      } in room ${room}: ${message}`
+    );
     socket.to(room).emit("chat-message", {
-      message: message,
-      name: rooms[room].users[socket.id],
+      message,
+      name: rooms[room]?.users[socket.id],
     });
   });
+
   socket.on("disconnect", () => {
+    console.log(`User disconnected: ${socket.id}`);
     getUserRooms(socket).forEach((room) => {
       if (!rooms[room]) return;
       const user = rooms[room].users[socket.id];
@@ -62,7 +74,6 @@ io.on("connection", (socket) => {
     });
   });
 });
-
 function getUserRooms(socket) {
   return Object.entries(rooms).reduce((names, [name, room]) => {
     if (room.users[socket.id] != null) names.push(name);
