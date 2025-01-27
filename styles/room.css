@@ -24,7 +24,7 @@ body {
   margin: 5px 0;
   border-radius: 5px;
   background-color: #d1d1d1;
-  font-size: 3rem;
+  font-size: 2rem;
 }
 
 #message-container div:nth-child(odd) {
@@ -66,8 +66,4 @@ body {
   border-bottom: solid 1px #3e3e3d;
   padding: 5px 10px;
   cursor: pointer;
-}
-
-#send-button:hover {
-  background-color: #1558b0;
 }
