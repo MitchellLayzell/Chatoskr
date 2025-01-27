@@ -52,4 +52,13 @@ function appendMessage(message) {
   const messageElement = document.createElement("div");
   messageElement.innerText = message;
   messageContainer.append(messageElement);
+
+  // Auto-scroll logic
+  const isAtBottom =
+    messageContainer.scrollTop + messageContainer.clientHeight >=
+    messageContainer.scrollHeight - 10;
+
+  if (isAtBottom) {
+    messageContainer.scrollTop = messageContainer.scrollHeight;
+  }
 }
