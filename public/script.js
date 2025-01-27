@@ -51,14 +51,16 @@ window.addEventListener("beforeunload", () => {
 function appendMessage(message) {
   const messageElement = document.createElement("div");
   messageElement.innerText = message;
+  const messageContainer = document.getElementById("message-container");
   messageContainer.append(messageElement);
 
+  // Scroll to bottom unconditionally
+  messageContainer.scrollTop = messageContainer.scrollHeight;
+
+  // Optional: If you want to keep the "isAtBottom" logic
   const isAtBottom =
-    Math.abs(
-      messageContainer.scrollTop +
-        messageContainer.clientHeight -
-        messageContainer.scrollHeight
-    ) <= 10;
+    messageContainer.scrollTop + messageContainer.clientHeight >=
+    messageContainer.scrollHeight - 1; // Tolerate 1px rounding errors
 
   if (isAtBottom) {
     scrollToBottom(messageContainer);
@@ -66,8 +68,5 @@ function appendMessage(message) {
 }
 
 function scrollToBottom(container) {
-  container.scrollTo({
-    top: container.scrollHeight,
-    behavior: "smooth",
-  });
+  container.scrollTop = container.scrollHeight;
 }
