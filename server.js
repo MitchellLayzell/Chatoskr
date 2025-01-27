@@ -13,6 +13,11 @@ app.use(express.static(path.join(__dirname, "images")));
 
 const rooms = {};
 
+const PORT = process.env.PORT || 3000;
+server.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
+
 app.get("/", (req, res) => {
   res.render("index", { rooms: rooms });
 });
@@ -33,8 +38,6 @@ app.get("/:room", (req, res) => {
   }
   res.render("room", { roomName: req.params.room });
 });
-
-server.listen(3000);
 
 io.on("connection", (socket) => {
   socket.on("new-user", (room, name) => {
