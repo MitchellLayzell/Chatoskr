@@ -58,6 +58,7 @@ body {
 }
 
 #send-button {
+  width: 25%;
   background-color: #d6d7d1;
   color: black;
   border-top: solid 1px white;
