@@ -59,6 +59,13 @@ function appendMessage(message) {
     messageContainer.scrollHeight - 10;
 
   if (isAtBottom) {
-    messageContainer.scrollTop = messageContainer.scrollHeight;
+    scrollToBottom();
   }
+}
+
+function scrollToBottom() {
+  window.scrollTo({
+    top: document.body.scrollHeight,
+    behavior: "smooth",
+  });
 }
