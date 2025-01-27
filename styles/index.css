@@ -1,4 +1,9 @@
 /* Index page styling */
+
+body {
+  align-items: center;
+}
+
 h1 {
   font-size: 5rem;
 }
