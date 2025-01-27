@@ -53,7 +53,6 @@ function appendMessage(message) {
   messageElement.innerText = message;
   messageContainer.append(messageElement);
 
-  // Auto-scroll logic
   const isAtBottom =
     Math.abs(
       messageContainer.scrollTop +
@@ -62,6 +61,13 @@ function appendMessage(message) {
     ) <= 10;
 
   if (isAtBottom) {
-    messageContainer.scrollTop = messageContainer.scrollHeight;
+    scrollToBottom(messageContainer);
   }
+}
+
+function scrollToBottom(container) {
+  container.scrollTo({
+    top: container.scrollHeight,
+    behavior: "smooth",
+  });
 }
