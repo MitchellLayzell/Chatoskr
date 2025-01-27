@@ -35,12 +35,14 @@ a {
 }
 
 button {
-  background-color: #9e9a9b;
-  color: white;
-  border: none;
+  background-color: #d6d7d1;
+  color: black;
+  border-top: solid 1px white;
+  border-left: solid 1px white;
+  border-right: solid 1px #3e3e3d;
+  border-bottom: solid 1px #3e3e3d;
   padding: 5px 10px;
   cursor: pointer;
-  border-radius: 5px;
 }
 
 button:hover {

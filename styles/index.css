@@ -4,6 +4,8 @@ h1 {
 }
 
 #room-container {
+  width: 80%;
+  max-width: 1200px;
   margin-top: 50px;
   text-align: center;
   background-color: #fff;
@@ -20,7 +22,6 @@ h1 {
   display: inline-block;
   margin-top: 5px;
   padding: 5px 10px;
-  border-radius: 5px;
 }
 
 form {
@@ -29,17 +30,21 @@ form {
   justify-content: center;
 }
 
+#make-room {
+  width: 80%;
+  max-width: 1200px;
+  background-color: #fff;
+}
+
 input[name="room"] {
   padding: 10px;
   font-size: 1rem;
   margin-right: 10px;
   width: 250px;
-  border-radius: 5px;
   border: 1px solid #ccc;
 }
 
 button {
   padding: 10px 15px;
   font-size: 1rem;
-  border-radius: 5px;
 }
