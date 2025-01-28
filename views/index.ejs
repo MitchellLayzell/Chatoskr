@@ -21,7 +21,7 @@
       <% rooms.forEach(room => { %>
       <div>
         <span><%= room.name %></span>
-        <span>(<%= room.userCount %> users)</span>
+        <span>[<%= room.userCount %> users]</span>
         <a href="/<%= room.name %>">Join</a>
       </div>
       <% }) %>
