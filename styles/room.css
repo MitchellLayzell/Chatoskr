@@ -45,7 +45,6 @@ body {
   align-items: center;
   border-top: 1px solid #ddd;
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
-  margin-bottom: 10px;
 }
 
 #message-input {
