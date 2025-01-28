@@ -70,10 +70,18 @@ io.on("connection", (socket) => {
       if (user) {
         socket.to(room).emit("user-disconnected", user);
         delete rooms[room].users[socket.id];
+
+        // Remove the room if no users are left
+        if (Object.keys(rooms[room].users).length === 0) {
+          delete rooms[room];
+          console.log(`Room ${room} deleted due to no users.`);
+          io.emit("room-deleted", room); // Notify clients about room deletion
+        }
       }
     });
   });
 });
+
 function getUserRooms(socket) {
   return Object.entries(rooms).reduce((names, [name, room]) => {
     if (room.users[socket.id] != null) names.push(name);
