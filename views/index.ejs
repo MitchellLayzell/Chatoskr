@@ -18,9 +18,12 @@
     </div>
     <div id="room-container">
       <h2>Active Rooms</h2>
-      <% Object.keys(rooms).forEach(room => { %>
-      <div><%= room %></div>
-      <a href="/<%= room %>">Join</a>
+      <% rooms.forEach(room => { %>
+      <div>
+        <span><%= room.name %></span>
+        <span>(<%= room.userCount %> users)</span>
+        <a href="/<%= room.name %>">Join</a>
+      </div>
       <% }) %>
     </div>
     <form id="make-room" action="/room" method="POST">

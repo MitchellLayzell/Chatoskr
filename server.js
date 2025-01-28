@@ -19,7 +19,11 @@ server.listen(PORT, () => {
 });
 
 app.get("/", (req, res) => {
-  res.render("index", { rooms: rooms });
+  const roomData = Object.entries(rooms).map(([roomName, room]) => ({
+    name: roomName,
+    userCount: Object.keys(room.users).length,
+  }));
+  res.render("index", { rooms: roomData });
 });
 
 app.post("/room", (req, res) => {
