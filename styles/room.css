@@ -12,7 +12,7 @@ body {
   margin-top: 60px;
   padding: 20px;
   background-color: #d6d7d1;
-  max-height: 70vh;
+  height: 70vh;
   overflow-y: auto;
   border-top: solid 1px white;
   border-left: solid 1px white;
@@ -37,7 +37,7 @@ body {
   display: flex;
   max-width: 1200px;
   position: fixed;
-  bottom: 5;
+  bottom: 20;
   background-color: #d6d7d1;
   padding: 10px;
   display: flex;
