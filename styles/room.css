@@ -37,7 +37,7 @@ body {
   display: flex;
   max-width: 1200px;
   position: fixed;
-  bottom: 20;
+  bottom: 1;
   background-color: #d6d7d1;
   padding: 10px;
   display: flex;
@@ -45,6 +45,7 @@ body {
   align-items: center;
   border-top: 1px solid #ddd;
   box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+  margin-bottom: 10px;
 }
 
 #message-input {
