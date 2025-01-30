@@ -51,8 +51,7 @@ io.on("connection", (socket) => {
     socket.join(room);
     if (!rooms[room]) rooms[room] = { users: {} };
 
-    // Generate a random color
-    const randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
+    const randomColor = getRandomColor();
 
     rooms[room].users[socket.id] = { name, color: randomColor };
     socket.to(room).emit("user-connected", { name, color: randomColor });
@@ -80,11 +79,10 @@ io.on("connection", (socket) => {
         socket.to(room).emit("user-disconnected", user.name);
         delete rooms[room].users[socket.id];
 
-        // Remove the room if no users are left
         if (Object.keys(rooms[room].users).length === 0) {
           delete rooms[room];
           console.log(`Room ${room} deleted due to no users.`);
-          io.emit("room-deleted", room); // Notify clients about room deletion
+          io.emit("room-deleted", room);
         }
       }
     });
@@ -96,4 +94,27 @@ function getUserRooms(socket) {
     if (room.users[socket.id] != null) names.push(name);
     return names;
   }, []);
+}
+
+function getRandomColor() {
+  let color;
+  do {
+    color = "#" + Math.floor(Math.random() * 16777215).toString(16);
+  } while (isGrayish(color)); // Avoid grayish colors
+  return color;
+}
+
+function isGrayish(hex) {
+  // Convert hex to RGB
+  const bigint = parseInt(hex.slice(1), 16);
+  const r = (bigint >> 16) & 255;
+  const g = (bigint >> 8) & 255;
+  const b = bigint & 255;
+
+  // Check if color is too close to black, white, or gray
+  const brightness = r * 0.299 + g * 0.587 + b * 0.114; // Standard luminance formula
+  const isGray =
+    Math.abs(r - g) < 20 && Math.abs(g - b) < 20 && Math.abs(r - b) < 20;
+
+  return brightness > 220 || brightness < 50 || isGray; // Avoid too bright, too dark, or gray colors
 }
