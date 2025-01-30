@@ -23,9 +23,12 @@ body {
 
 #message-container div {
   padding: 8px;
-  margin: 5px 0;
-  background-color: #d1d1d1;
+  margin: 0;
+  background-color: #fff;
   font-size: 1rem;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
 }
 
 #send-container {
