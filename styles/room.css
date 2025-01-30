@@ -31,6 +31,10 @@ body {
   flex-grow: 1;
   padding: 10px 0; /* Space between the messages and edges */
   overflow-y: auto; /* Scroll if messages overflow */
+  border-bottom: solid 1px white;
+  border-right: solid 1px white;
+  border-left: solid 1px #3e3e3d;
+  border-top: solid 1px #3e3e3d;
 }
 
 #message-container div {
