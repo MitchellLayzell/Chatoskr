@@ -6,13 +6,13 @@ const messageInput = document.getElementById("message-input");
 
 if (messageForm != null) {
   const name = prompt("What is your name?");
-  appendMessage("You joined", "gray"); // System messages in a full color
+  appendMessage("You joined", "gray"); // System message
   socket.emit("new-user", roomName, name);
 
   messageForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const message = messageInput.value;
-    appendMessage(`You: ${message}`, "blue"); // Local user messages
+    appendMessage(`You: ${message}`, "blue"); // Your own messages
     socket.emit("send-chat-message", roomName, message);
     messageInput.value = "";
   });
@@ -40,11 +40,17 @@ socket.on("user-disconnected", (name) => {
   appendMessage(`${name} disconnected`, "red");
 });
 
-function appendMessage(message, color = "black") {
+function appendMessage(name, message, color = "black") {
   const messageElement = document.createElement("div");
-  messageElement.innerText = message;
-  messageElement.style.color = color;
-  messageElement.style.fontWeight = "bold";
+
+  const nameSpan = document.createElement("span");
+  nameSpan.innerText = name;
+  nameSpan.style.color = color;
+  nameSpan.style.fontWeight = "bold";
+  nameSpan.style.paddingRight = "5px";
+
+  messageElement.appendChild(nameSpan);
+  messageElement.appendChild(document.createTextNode(`: ${message}`));
 
   messageContainer.append(messageElement);
 
