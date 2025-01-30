@@ -6,13 +6,13 @@ const messageInput = document.getElementById("message-input");
 
 if (messageForm != null) {
   const name = prompt("What is your name?");
-  appendMessage("You joined", "gray"); // System message
+  appendMessage("System", "You joined", "gray"); // System message
   socket.emit("new-user", roomName, name);
 
   messageForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const message = messageInput.value;
-    appendMessage(`You: ${message}`, "blue"); // Your own messages
+    appendMessage("You", message, "blue"); // Your own messages
     socket.emit("send-chat-message", roomName, message);
     messageInput.value = "";
   });
@@ -29,15 +29,15 @@ socket.on("room-created", (room) => {
 });
 
 socket.on("chat-message", (data) => {
-  appendMessage(`${data.name}: ${data.message}`, data.color);
+  appendMessage(data.name, data.message, data.color);
 });
 
 socket.on("user-connected", (data) => {
-  appendMessage(`${data.name} connected`, "green");
+  appendMessage("System", `${data.name} connected`, "green");
 });
 
 socket.on("user-disconnected", (name) => {
-  appendMessage(`${name} disconnected`, "red");
+  appendMessage("System", `${name} disconnected`, "red");
 });
 
 function appendMessage(name, message, color = "black") {
