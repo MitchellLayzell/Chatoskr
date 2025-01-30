@@ -39,7 +39,6 @@ body {
   padding: 10px; /* Adds space inside each message */
   background-color: #fff;
   font-size: 1rem;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 #send-container {
