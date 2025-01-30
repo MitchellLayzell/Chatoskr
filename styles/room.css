@@ -27,7 +27,7 @@ body {
 /* New container for the messages */
 #message-content {
   max-height: 80;
-  width: 80%;
+  width: 100%;
   flex-grow: 1;
   padding: 10px 0; /* Space between the messages and edges */
   overflow-y: auto; /* Scroll if messages overflow */
