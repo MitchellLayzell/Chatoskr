@@ -6,13 +6,13 @@ const messageInput = document.getElementById("message-input");
 
 if (messageForm != null) {
   const name = prompt("What is your name?");
-  appendMessage("You joined");
+  appendMessage("System", "You joined", "gray"); // System messages in gray
   socket.emit("new-user", roomName, name);
 
   messageForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const message = messageInput.value;
-    appendMessage(`You: ${message}`);
+    appendMessage("You", message, "blue"); // Local messages in blue
     socket.emit("send-chat-message", roomName, message);
     messageInput.value = "";
   });
@@ -29,15 +29,15 @@ socket.on("room-created", (room) => {
 });
 
 socket.on("chat-message", (data) => {
-  appendMessage(`${data.name}: ${data.message}`, data.color);
+  appendMessage(data.name, data.message, data.color);
 });
 
 socket.on("user-connected", (data) => {
-  appendMessage(`${data.name}: ${data.message}`, data.color);
+  appendMessage("System", `${data.name} connected`, "gray");
 });
 
 socket.on("user-disconnected", (name) => {
-  appendMessage(name, "disconnected", "black");
+  appendMessage("System", `${name} disconnected`, "gray");
 });
 
 function appendMessage(name, message, color = "black") {
@@ -46,21 +46,14 @@ function appendMessage(name, message, color = "black") {
   const nameSpan = document.createElement("span");
   nameSpan.innerText = name;
   nameSpan.style.color = color;
-  nameSpan.style.fontWeight = "bold"; // Make names stand out
-  nameSpan.style.paddingRight = "5px"; // Add spacing for better readability
+  nameSpan.style.fontWeight = "bold";
+  nameSpan.style.paddingRight = "5px";
 
   messageElement.appendChild(nameSpan);
   messageElement.appendChild(document.createTextNode(`: ${message}`));
 
-  const messageContainer = document.getElementById("message-container");
-
-  const isAtBottom =
-    messageContainer.scrollTop + messageContainer.clientHeight >=
-    messageContainer.scrollHeight - 1;
-
   messageContainer.append(messageElement);
 
-  if (isAtBottom) {
-    messageContainer.scrollTop = messageContainer.scrollHeight;
-  }
+  // Auto-scroll to the bottom
+  messageContainer.scrollTop = messageContainer.scrollHeight;
 }
