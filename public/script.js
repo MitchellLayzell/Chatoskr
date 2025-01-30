@@ -29,28 +29,21 @@ socket.on("room-created", (room) => {
 });
 
 socket.on("chat-message", (data) => {
-  appendMessage(`${data.name}: ${data.message}`);
+  appendMessage(`${data.name}: ${data.message}`, data.color);
 });
 
-socket.on("user-connected", (name) => {
-  appendMessage(`${name} connected`);
+socket.on("user-connected", (data) => {
+  appendMessage(`${data.name} connected`, data.color);
 });
 
 socket.on("user-disconnected", (name) => {
-  appendMessage(`${name} disconnected`);
+  appendMessage(`${name} disconnected`, "gray");
 });
 
-socket.on("disconnect", () => {
-  console.log("Disconnected from server");
-});
-
-window.addEventListener("beforeunload", () => {
-  socket.disconnect(); // Ensure cleanup when the user leaves or refreshes
-});
-
-function appendMessage(message) {
+function appendMessage(message, color = "black") {
   const messageElement = document.createElement("div");
   messageElement.innerText = message;
+  messageElement.style.color = color; // Apply the assigned color
 
   const messageContainer = document.getElementById("message-container");
 

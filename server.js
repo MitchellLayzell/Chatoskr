@@ -50,19 +50,24 @@ io.on("connection", (socket) => {
     console.log(`${name} joined room: ${room}`);
     socket.join(room);
     if (!rooms[room]) rooms[room] = { users: {} };
-    rooms[room].users[socket.id] = name;
-    socket.to(room).emit("user-connected", name);
+
+    // Generate a random color
+    const randomColor = "#" + Math.floor(Math.random() * 16777215).toString(16);
+
+    rooms[room].users[socket.id] = { name, color: randomColor };
+    socket.to(room).emit("user-connected", { name, color: randomColor });
   });
 
   socket.on("send-chat-message", (room, message) => {
-    console.log(
-      `Message from ${
-        rooms[room]?.users[socket.id]
-      } in room ${room}: ${message}`
-    );
+    if (!rooms[room]?.users[socket.id]) return;
+
+    const user = rooms[room].users[socket.id];
+    console.log(`Message from ${user.name} in room ${room}: ${message}`);
+
     socket.to(room).emit("chat-message", {
       message,
-      name: rooms[room]?.users[socket.id],
+      name: user.name,
+      color: user.color,
     });
   });
 
@@ -72,7 +77,7 @@ io.on("connection", (socket) => {
       if (!rooms[room]) return;
       const user = rooms[room].users[socket.id];
       if (user) {
-        socket.to(room).emit("user-disconnected", user);
+        socket.to(room).emit("user-disconnected", user.name);
         delete rooms[room].users[socket.id];
 
         // Remove the room if no users are left
