@@ -29,33 +29,37 @@ socket.on("room-created", (room) => {
 });
 
 socket.on("chat-message", (data) => {
-  appendMessage(`${data.name}: ${data.message}`, data.color);
+  appendMessage(data.name, data.message, data.color);
 });
 
 socket.on("user-connected", (data) => {
-  appendMessage(`${data.name} connected`, data.color);
+  appendMessage(data.name, "connected", data.color);
 });
 
 socket.on("user-disconnected", (name) => {
-  appendMessage(`${name} disconnected`, "gray");
+  appendMessage(name, "disconnected", "gray");
 });
 
-function appendMessage(message, color = "black") {
+function appendMessage(name, message, color = "black") {
   const messageElement = document.createElement("div");
-  messageElement.innerText = message;
-  messageElement.style.color = color; // Apply the assigned color
+
+  const nameSpan = document.createElement("span");
+  nameSpan.innerText = name;
+  nameSpan.style.color = color;
+  nameSpan.style.fontWeight = "bold"; // Make names stand out
+  nameSpan.style.paddingRight = "5px"; // Add spacing for better readability
+
+  messageElement.appendChild(nameSpan);
+  messageElement.appendChild(document.createTextNode(`: ${message}`));
 
   const messageContainer = document.getElementById("message-container");
 
-  // Check if the user is at the bottom
   const isAtBottom =
     messageContainer.scrollTop + messageContainer.clientHeight >=
-    messageContainer.scrollHeight - 1; // Adjust for small rounding errors
+    messageContainer.scrollHeight - 1;
 
-  // Add the new message
   messageContainer.append(messageElement);
 
-  // Scroll to the bottom only if the user was already there
   if (isAtBottom) {
     messageContainer.scrollTop = messageContainer.scrollHeight;
   }

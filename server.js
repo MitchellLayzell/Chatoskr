@@ -100,21 +100,20 @@ function getRandomColor() {
   let color;
   do {
     color = "#" + Math.floor(Math.random() * 16777215).toString(16);
-  } while (isGrayish(color)); // Avoid grayish colors
+  } while (isInvalidColor(color)); // Keep generating until a valid color is found
   return color;
 }
 
-function isGrayish(hex) {
-  // Convert hex to RGB
+function isInvalidColor(hex) {
   const bigint = parseInt(hex.slice(1), 16);
   const r = (bigint >> 16) & 255;
   const g = (bigint >> 8) & 255;
   const b = bigint & 255;
 
-  // Check if color is too close to black, white, or gray
   const brightness = r * 0.299 + g * 0.587 + b * 0.114; // Standard luminance formula
   const isGray =
     Math.abs(r - g) < 20 && Math.abs(g - b) < 20 && Math.abs(r - b) < 20;
 
-  return brightness > 220 || brightness < 50 || isGray; // Avoid too bright, too dark, or gray colors
+  // Ensure the color is neither too bright (>200) nor too dark (<80) and is not grayish
+  return brightness > 200 || brightness < 80 || isGray;
 }
