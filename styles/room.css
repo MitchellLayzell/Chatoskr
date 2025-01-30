@@ -24,7 +24,14 @@ body {
   align-items: flex-start;
 }
 
-/* Prevent messages from touching edges */
+/* New container for the messages */
+#message-content {
+  width: 100%;
+  flex-grow: 1;
+  padding: 10px 0; /* Space between the messages and edges */
+  overflow-y: auto; /* Scroll if messages overflow */
+}
+
 #message-container div {
   max-width: 100%;
   word-wrap: break-word;
