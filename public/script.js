@@ -29,15 +29,15 @@ socket.on("room-created", (room) => {
 });
 
 socket.on("chat-message", (data) => {
-  appendMessage(data.name, data.message, data.color);
+  appendMessage(`${data.name}: ${data.message}`, data.color);
 });
 
 socket.on("user-connected", (data) => {
-  appendMessage(data.name, "connected", data.color);
+  appendMessage(`${data.name}: ${data.message}`, data.color);
 });
 
 socket.on("user-disconnected", (name) => {
-  appendMessage(name, "disconnected", "gray");
+  appendMessage(name, "disconnected", "black");
 });
 
 function appendMessage(name, message, color = "black") {

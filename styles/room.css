@@ -28,10 +28,6 @@ body {
   font-size: 1rem;
 }
 
-#message-container div:nth-child(odd) {
-  background-color: #e9e9e9;
-}
-
 #send-container {
   width: 80%;
   display: flex;
