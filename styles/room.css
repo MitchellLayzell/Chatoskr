@@ -34,7 +34,7 @@ body {
 }
 
 #message-container div {
-  width: 80%;
+  width: 100%;
   word-wrap: break-word;
   padding: 10px; /* Adds space inside each message */
   background-color: #fff;
