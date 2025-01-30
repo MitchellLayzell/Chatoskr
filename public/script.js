@@ -6,7 +6,7 @@ const messageInput = document.getElementById("message-input");
 
 if (messageForm != null) {
   const name = prompt("What is your name?");
-  appendMessage("System", "You joined", "gray"); // System message
+  appendMessage("You", "joined", "gray"); // System message
   socket.emit("new-user", roomName, name);
 
   messageForm.addEventListener("submit", (e) => {
@@ -33,11 +33,11 @@ socket.on("chat-message", (data) => {
 });
 
 socket.on("user-connected", (data) => {
-  appendMessage("System", `${data.name} connected`, "green");
+  appendMessage(data.name, "connected", "green");
 });
 
 socket.on("user-disconnected", (name) => {
-  appendMessage("System", `${name} disconnected`, "red");
+  appendMessage(name, "disconnected", "red");
 });
 
 function appendMessage(name, message, color = "black") {
