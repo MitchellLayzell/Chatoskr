@@ -43,6 +43,9 @@ body {
   padding: 10px; /* Adds space inside each message */
   background-color: #fff;
   font-size: 1rem;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
 }
 
 #send-container {
@@ -89,4 +92,23 @@ body {
   border-left: solid 1px black;
   border-right: solid 2px black;
   border-bottom: solid 2px black;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
