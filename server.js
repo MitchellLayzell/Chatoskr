@@ -112,7 +112,7 @@ function getRandomColor() {
   let color;
   do {
     color = "#" + Math.floor(Math.random() * 16777215).toString(16);
-  } while (isInvalidColor(color)); // Keep generating until a valid color is found
+  } while (isInvalidColor(color));
   return color;
 }
 
@@ -122,10 +122,9 @@ function isInvalidColor(hex) {
   const g = (bigint >> 8) & 255;
   const b = bigint & 255;
 
-  const brightness = r * 0.299 + g * 0.587 + b * 0.114; // Standard luminance formula
+  const brightness = r * 0.299 + g * 0.587 + b * 0.114;
   const isGray =
     Math.abs(r - g) < 20 && Math.abs(g - b) < 20 && Math.abs(r - b) < 20;
 
-  // Ensure the color is neither too bright (>200) nor too dark (<80) and is not grayish
   return brightness > 200 || brightness < 80 || isGray;
 }

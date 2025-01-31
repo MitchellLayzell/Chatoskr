@@ -6,7 +6,6 @@ const messageInput = document.getElementById("message-input");
 
 if (messageForm != null) {
   const name = prompt("What is your name?");
-  appendSystemMessage("You joined", "black"); // Full system message in color
   appendSystemMessage("You joined", "black");
 
   const encodedRoomName = encodeURIComponent(roomName);
@@ -15,7 +14,6 @@ if (messageForm != null) {
   messageForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const message = messageInput.value;
-    appendMessage("You", message, "black"); // Only username is colored
     appendMessage("You", message, "black");
     socket.emit("send-chat-message", encodedRoomName, message);
     messageInput.value = "";
@@ -40,11 +38,11 @@ socket.on("chat-message", (data) => {
 });
 
 socket.on("user-connected", (data) => {
-  appendSystemMessage(`${data.name} connected`, "black"); // Full text in color
+  appendSystemMessage(`${data.name} connected`, "black");
 });
 
 socket.on("user-disconnected", (name) => {
-  appendSystemMessage(`${name} disconnected`, "black"); // Full text in color
+  appendSystemMessage(`${name} disconnected`, "black");
 });
 
 socket.on("room-deleted", (room) => {
@@ -74,8 +72,6 @@ function appendMessage(name, message, color = "black") {
   messageElement.appendChild(document.createTextNode(`: ${message}`));
 
   messageContainer.append(messageElement);
-
-  // Auto-scroll to the bottom
   messageContainer.scrollTop = messageContainer.scrollHeight;
 }
 
@@ -86,7 +82,5 @@ function appendSystemMessage(message, color) {
   messageElement.style.fontWeight = "bold";
 
   messageContainer.append(messageElement);
-
-  // Auto-scroll to the bottom
   messageContainer.scrollTop = messageContainer.scrollHeight;
 }
