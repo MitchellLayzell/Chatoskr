@@ -27,7 +27,7 @@ app.get("/", (req, res) => {
 });
 
 // Function to sanitize room names
-const sanitizeRoomName = (room) => room.replace(/[^a-zA-Z0-9-_]/g, "_");
+const sanitizeRoomName = (room) => room.replace(/[^\w\s-]/g, "");
 
 app.post("/room", (req, res) => {
   let roomName = sanitizeRoomName(req.body.room);
