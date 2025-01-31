@@ -26,44 +26,56 @@ app.get("/", (req, res) => {
   res.render("index", { rooms: roomData });
 });
 
+// Function to sanitize room names
+const sanitizeRoomName = (room) => room.replace(/[^a-zA-Z0-9-_]/g, "_");
+
 app.post("/room", (req, res) => {
-  if (rooms[req.body.room] != null) {
+  let roomName = sanitizeRoomName(req.body.room);
+
+  if (rooms[roomName] != null) {
     return res.redirect("/");
   }
-  rooms[req.body.room] = { users: {} };
-  res.redirect(req.body.room);
-  // Send message that new room was created
-  io.emit("room-created", req.body.room);
+  rooms[roomName] = { users: {} };
+
+  res.redirect(`/${encodeURIComponent(roomName)}`);
+  io.emit("room-created", encodeURIComponent(roomName));
 });
 
 app.get("/:room", (req, res) => {
-  if (rooms[req.params.room] == null) {
+  let roomName = decodeURIComponent(req.params.room);
+  roomName = sanitizeRoomName(roomName);
+
+  if (rooms[roomName] == null) {
     return res.redirect("/");
   }
-  res.render("room", { roomName: req.params.room });
+  res.render("room", { roomName });
 });
 
 io.on("connection", (socket) => {
   console.log("New user connected", socket.id);
 
   socket.on("new-user", (room, name) => {
-    console.log(`${name} joined room: ${room}`);
-    socket.join(room);
-    if (!rooms[room]) rooms[room] = { users: {} };
+    const decodedRoom = sanitizeRoomName(decodeURIComponent(room));
+
+    console.log(`${name} joined room: ${decodedRoom}`);
+    socket.join(decodedRoom);
+    if (!rooms[decodedRoom]) rooms[decodedRoom] = { users: {} };
 
     const randomColor = getRandomColor();
 
-    rooms[room].users[socket.id] = { name, color: randomColor };
-    socket.to(room).emit("user-connected", { name, color: randomColor });
+    rooms[decodedRoom].users[socket.id] = { name, color: randomColor };
+    socket.to(decodedRoom).emit("user-connected", { name, color: randomColor });
   });
 
   socket.on("send-chat-message", (room, message) => {
-    if (!rooms[room]?.users[socket.id]) return;
+    const decodedRoom = sanitizeRoomName(decodeURIComponent(room));
 
-    const user = rooms[room].users[socket.id];
-    console.log(`Message from ${user.name} in room ${room}: ${message}`);
+    if (!rooms[decodedRoom]?.users[socket.id]) return;
 
-    socket.to(room).emit("chat-message", {
+    const user = rooms[decodedRoom].users[socket.id];
+    console.log(`Message from ${user.name} in room ${decodedRoom}: ${message}`);
+
+    socket.to(decodedRoom).emit("chat-message", {
       message,
       name: user.name,
       color: user.color,
@@ -82,7 +94,7 @@ io.on("connection", (socket) => {
         if (Object.keys(rooms[room].users).length === 0) {
           delete rooms[room];
           console.log(`Room ${room} deleted due to no users.`);
-          io.emit("room-deleted", room);
+          io.emit("room-deleted", encodeURIComponent(room));
         }
       }
     });

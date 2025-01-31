@@ -7,23 +7,30 @@ const messageInput = document.getElementById("message-input");
 if (messageForm != null) {
   const name = prompt("What is your name?");
   appendSystemMessage("You joined", "black"); // Full system message in color
-  socket.emit("new-user", roomName, name);
+  appendSystemMessage("You joined", "black");
+
+  const encodedRoomName = encodeURIComponent(roomName);
+  socket.emit("new-user", encodedRoomName, name);
 
   messageForm.addEventListener("submit", (e) => {
     e.preventDefault();
     const message = messageInput.value;
     appendMessage("You", message, "black"); // Only username is colored
-    socket.emit("send-chat-message", roomName, message);
+    appendMessage("You", message, "black");
+    socket.emit("send-chat-message", encodedRoomName, message);
     messageInput.value = "";
   });
 }
 
 socket.on("room-created", (room) => {
+  const decodedRoom = decodeURIComponent(room);
   const roomElement = document.createElement("div");
-  roomElement.innerText = room;
+  roomElement.innerText = decodedRoom;
+
   const roomLink = document.createElement("a");
-  roomLink.href = `/${room}`;
+  roomLink.href = `/${encodeURIComponent(decodedRoom)}`;
   roomLink.innerText = "Join";
+
   roomContainer.append(roomElement);
   roomContainer.append(roomLink);
 });
@@ -38,6 +45,20 @@ socket.on("user-connected", (data) => {
 
 socket.on("user-disconnected", (name) => {
   appendSystemMessage(`${name} disconnected`, "black"); // Full text in color
+});
+
+socket.on("room-deleted", (room) => {
+  const decodedRoom = decodeURIComponent(room);
+  const roomElements = [...roomContainer.children];
+
+  roomElements.forEach((element) => {
+    if (
+      element.innerText === decodedRoom ||
+      element.href?.endsWith(`/${encodeURIComponent(decodedRoom)}`)
+    ) {
+      element.remove();
+    }
+  });
 });
 
 function appendMessage(name, message, color = "black") {
